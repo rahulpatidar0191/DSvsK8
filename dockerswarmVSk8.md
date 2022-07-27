@@ -54,3 +54,4 @@ Both K8s and Docker Swarm enable a user to quickly scale infrastructure up or do
 Ref:
 1. K8s on dropping Docker as a container runtime https://acloudguru.com/blog/engineering/kubernetes-is-deprecating-docker-what-you-need-to-know
 2. Docker Swarm VS K8s https://phoenixnap.com/blog/kubernetes-vs-docker-swarm
+3. Load balancing in Docker swam https://blog.octo.com/en/how-does-it-work-docker-part-3-load-balancing-service-discovery-and-security/
