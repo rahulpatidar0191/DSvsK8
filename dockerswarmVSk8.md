@@ -1,4 +1,4 @@
-## Docker swarm VS Kubernetes 
+## Docker Swarm VS Kubernetes 
 #### A brief intro of orchestration  
 Orchestration is the automation of numerous tasks that run at the same time in a way that minimizes production issues and time to market.
 **example of music conductor**
@@ -9,25 +9,48 @@ Orchestration is the automation of numerous tasks that run at the same time in a
 **Swarm**: There is simple installation with Docker, and instances are typically consistent across operating systems.
 
 **Kubernetes**: Manual installation can differ for each operating system. No installation is required for managed offerings from cloud providers.
-- Setting up you own cluster is complex, Option 1 using kubeadm, it'll take care of most things Option 1) set up your own cluster : set up your own cluster
+- Setting up you own cluster is complex. Options: 
+  1. Using kubeadm, it'll take care of most things Option 
+  2. Set up your own cluster
 
+#### 2. GUI
+ **Swarm**: does not have a built-in dashboard. You need to integrate Docker Swarm with a third-party tool to get a GUI. Some of the most popular options are Portainer, Dockstation, Swarmpit, and Shipyard.
 
-#### 2. Availability and scaling: 
-**Swarm**: Docker Swarm provides high availability as you can easily duplicate the microservices in Docker Swarm. Moreover, Docker Swarm has a faster deployment time. On the other hand, it doesn’t provide automatic scaling.
-**Kubernetes**: Kubernetes is by nature highly available, fault tolerant, and **self-healing**. It also provides automatic scaling and can replace faulty pods if required.
-
+**Kubernetes**: Provides built-in dashboards via the Web UI, allowing a convenient way to control clusters and view statuses. 
 
 #### 3. Load balancing: 
-**Swarm**: Comes with internal load balancers.
-**Kubernetes**: Discovery of services is enabled through a single DNS name. Kubernetes has access to container applications through an IP address or HTTP route.
+Docker Swarm offers automatic load balancing, while Kubernetes does not. However, it is easy to integrate load balancing through third-party tools in Kubernetes.
+**Swarm**: Comes with internal load balancers and offers automatic load balancing
+**Kubernetes**: Services are made discoverable through a single DNS name. Kubernetes accesses container applications through an IP address or HTTP route.
 
 
 #### 4. Monitoring:
-**Swarm**: Docker Swarm supports monitoring only through third-party applications. There are no in-built monitoring mechanisms.
-**Kubernetes**: In contrast, Kubernetes has built-in monitoring and supports integration with third-party monitoring tools.
+**Kubernetes** offers built-in logging and monitoring.. Vanilla K8s monitors app performance on two levels:
+    - By inspecting individual services, pods, and containers.
+    - By observing the behavior of an entire cluster.
+As a K8s monitoring best practice, you should add a third-party tool to improve event-based monitoring. Here are some options:
+    - ElasticSearch/Kibana.
+    - InfluxDB.
+    - Grafana.
+    - Sysdig.
 
-#### 5. Security:
+**Swarm** has basic server log and event tools from Docker, but these do not offer anything remotely close to K8s monitoring. You will likely need a third-party extension or app (InfluxDB, Grafana, cAdvisor, etc.) to meet monitoring needs.
+
+
+#### 5. Scaling: 
+Both K8s and Docker Swarm enable a user to quickly scale infrastructure up or down depending on current needs. 
+
+**Swarm**: Requires users to perform scaling manually (via Docker Compose YAML templates). However, the platform is faster in deploying containers than what K8s can offer as there's no complex framework slowing scaling down.
+**Kubernetes**: Has a feature for automated scaling that can self-adjust based on current traffic. K8s supports auto-scaling on both:
+    - The cluster level (via Cluster Autoscaling).
+    - The pod level (via Horizontal Pod Autoscaler).
+
+
+#### 6. Security:
 **Swarm**: Docker Swarm relies on transport layer security (TLS) to carry out security and access control-related tasks. 
 
 **Kubernetes**: Kubernetes supports multiple security protocols such as RBAC, SSL/TLS, secrets management, policies, and so on.
 
+Ref:
+1. K8s on dropping Docker as a container runtime https://acloudguru.com/blog/engineering/kubernetes-is-deprecating-docker-what-you-need-to-know
+2. Docker Swarm VS K8s https://phoenixnap.com/blog/kubernetes-vs-docker-swarm
